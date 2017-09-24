@@ -9,8 +9,13 @@ target_dir='D:\\Backup'
 today=target_dir+os.sep+time.strftime('%Y%m%d')
 #将当前时间作为 zip 文件的文件名
 now=time.strftime("%H%M%S")
-#zip 文件名称格式
-target = today + os.sep + now +'.zip'
+#添加一条来自用户的注释以创建 zip 文件的文件名
+comment=input('Enter a comment -->')
+#检查是否有注释输入
+if len(comment)==0:
+    target = today + os.sep + now +'.zip'
+else:
+    target = today +os.sep + now +'_'+comment.replace(' ','_')+'.zip'
 #如果目标目录不存在，则进行创建
 if not os.path.exists(today):
     os.mkdir(today)
