@@ -5,11 +5,16 @@ source=['"C:\\My Documents"','C:\\Code']
 #2.备份文件必须存储在一个主备份目录中
 target_dir='D:\\Backup'
 #3.备份文件将打包压缩成 zip 文件
-#4.zip压缩文件的文件名由当前日期与时间构成
-target = target_dir + os.sep + time.strftime('%Y%m%d%H%M%S')+'.zip'
+#4.将当前日期作为主备份目录下的子目录名称
+today=target_dir+os.sep+time.strftime('%Y%m%d')
+#将当前时间作为 zip 文件的文件名
+now=time.strftime("%H%M%S")
+#zip 文件名称格式
+target = today + os.sep + now +'.zip'
 #如果目标目录不存在，则进行创建
-if not os.path.exists(target_dir):
-    os.mkdir(target_dir)
+if not os.path.exists(today):
+    os.mkdir(today)
+    print("Sucessfully created directory",today)
 #5.使用 zip 命令将文件打包成 zip 格式
 zip_command='zip -r {0} {1}'.format(target,' '.join(source))
 #运行备份
